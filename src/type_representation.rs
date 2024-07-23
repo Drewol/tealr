@@ -360,7 +360,7 @@ impl<T: ToTypename, const N: usize> ToTypename for [T; N] {
 
 impl<T: ToTypename> ToTypename for Option<T> {
     fn to_typename() -> Type {
-        T::to_typename()
+        Type::Or(vec![T::to_typename(), Type::new_single("nil", KindOfType::Builtin)])
     }
 }
 
